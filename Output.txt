@@ -1,0 +1,2 @@
+| 0 |UAC| 1 |GGA| 2 |GAU| 3 |CAU
+| 0 |Tyrosine| 1 |Glycine| 2 |Aspartate| 3 |Histidine
