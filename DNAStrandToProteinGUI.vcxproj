@@ -154,8 +154,10 @@
     <ResourceCompile Include="DNAStrandToProteinGUI.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="background.bmp" />
     <Image Include="DNAStrandToProteinGUI.ico" />
     <Image Include="small.ico" />
+    <Image Include="picture_compress.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

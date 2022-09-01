@@ -1,0 +1,69 @@
+﻿  DNAStrandToProteinGUI.cpp
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\DNAStrandToProteinGUI.cpp(153,64): warning C4302: 'type cast': truncation from 'HWND' to 'WORD'
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\DNAStrandToProteinGUI.cpp(167,59): warning C4302: 'type cast': truncation from 'HWND' to 'WORD'
+F:\Studio\VC\Tools\MSVC\14.29.30133\include\xstring(2575,23): warning C4244: 'argument': conversion from '_Elem' to 'const _Elem', possible loss of data
+          with
+          [
+              _Elem=wchar_t
+          ]
+          and
+          [
+              _Elem=char
+          ]
+F:\Studio\VC\Tools\MSVC\14.29.30133\include\xstring(2586): message : see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct<_Iter>(_Iter,const _Iter,std::input_iterator_tag)' being compiled
+          with
+          [
+              _Iter=wchar_t *
+          ]
+F:\Studio\VC\Tools\MSVC\14.29.30133\include\xstring(2586): message : see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct<_Iter>(_Iter,const _Iter,std::input_iterator_tag)' being compiled
+          with
+          [
+              _Iter=wchar_t *
+          ]
+F:\Studio\VC\Tools\MSVC\14.29.30133\include\xstring(2566): message : see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct<_Iter>(const _Iter,const _Iter,std::forward_iterator_tag)' being compiled
+          with
+          [
+              _Iter=wchar_t *
+          ]
+F:\Studio\VC\Tools\MSVC\14.29.30133\include\xstring(2566): message : see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct<_Iter>(const _Iter,const _Iter,std::forward_iterator_tag)' being compiled
+          with
+          [
+              _Iter=wchar_t *
+          ]
+F:\Studio\VC\Tools\MSVC\14.29.30133\include\xstring(3294): message : see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<_Iter,0>(_Iter,_Iter,const _Alloc &)' being compiled
+          with
+          [
+              _Iter=TCHAR *,
+              _Alloc=std::allocator<char>
+          ]
+F:\Studio\VC\Tools\MSVC\14.29.30133\include\xstring(3294): message : see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<_Iter,0>(_Iter,_Iter,const _Alloc &)' being compiled
+          with
+          [
+              _Iter=TCHAR *,
+              _Alloc=std::allocator<char>
+          ]
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\Utilities.h(91): message : see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>> &std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign<Type*,0>(const _Iter,const _Iter)' being compiled
+          with
+          [
+              Type=TCHAR,
+              _Iter=TCHAR *
+          ]
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\Utilities.h(89): message : see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>> &std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign<Type*,0>(const _Iter,const _Iter)' being compiled
+          with
+          [
+              Type=TCHAR,
+              _Iter=TCHAR *
+          ]
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\DNAStrandToProteinGUI.cpp(171): message : see reference to function template instantiation 'std::string TCHAR2String<TCHAR>(Type *)' being compiled
+          with
+          [
+              Type=TCHAR
+          ]
+  Translate.cpp
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\Translate.cpp(30,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\Translate.cpp(63,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\Translate.cpp(103,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\Translate.cpp(211,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\Translate.cpp(216,31): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  DNAStrandToProteinGUI.vcxproj -> C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\Debug\DNAStrandToProteinGUI.exe

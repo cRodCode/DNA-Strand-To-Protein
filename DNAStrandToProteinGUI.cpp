@@ -31,9 +31,11 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 HWND hWnd_btnSubmit;                            // submit button
 HWND hWnd_btnSelectInput;                       // open windows explorer
+HWND hWnd_btnSelectOutput;                      // select an output file
 HWND hWnd_txtData;                              // txt box to input data title
 HWND hWnd_txtOutput;                            // txt box to name output data
 bool GetOpenFileName();							// prompt for read filespec using common open dialog box
+bool GetSaveFileName();                         // prompt for read filespec using common open dialog box
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -150,17 +152,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             switch (wmId)
             {
             case BN_CLICKED:
+                if (LOWORD(lParam) == (WORD)hWnd_btnSelectOutput)
+                {
+                    if (GetSaveFileName())
+                    {
+                        SendMessage(                        // message to window
+                            hWnd_txtOutput,                 // filename label
+                            WM_SETTEXT,                     // set the label's text
+                            NULL,                           // wParam not used
+                            LPARAM(szOutFName));            // filename only
+                    }
+                }
                 if (LOWORD(lParam) == (WORD)hWnd_btnSelectInput)
                 {
                     if (GetOpenFileName())
                     {
-                        SendMessage(                        // message to window
-                            hWnd_txtData,                    // filename label
-                            WM_SETTEXT,                     // set the label's text
-                            NULL,                           // wParam not used
+                        SendMessage(                       // message to window
+                            hWnd_txtData,                  // filename label
+                            WM_SETTEXT,                    // set the label's text
+                            NULL,                          // wParam not used
                             LPARAM(szInFName));            // filename only
-                        
-                        
                     }
                     
                 }
@@ -168,10 +179,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 {
                     GetWindowText(hWnd_txtData, szInput, TCHAR_SIZE);
                     GetWindowText(hWnd_txtOutput, szOutput, TCHAR_SIZE);
-                    trans.readFile(TCHAR2String(szInput));
+                    trans.readFile(cInputPath);
                     trans.toTrna();
                     trans.toProtein();
-                    trans.outputFile(TCHAR2String(szOutput));
+                    trans.outputFile(cOutputPath);
                 }
                 break;
             case IDM_ABOUT:
@@ -190,6 +201,48 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: Add any drawing code that uses hdc here...
+            RECT rClient;
+            int cx, cy;                         // hold client x and y
+            GetClientRect(                      // get client rectangle size
+                hWnd, &rClient);
+            cx = rClient.right - rClient.left;  // capture rectangle width
+            cy = rClient.bottom - rClient.top;  // capture rectangle heigth
+
+            // load the background butmap recourse
+            HDC hmemdc = CreateCompatibleDC(hdc);       // memory do ( copy of hdc)
+            HBITMAP hBitmap1;                           // handle to bitmaps
+            BITMAP bitmap;                              // bitmap
+
+            hBitmap1 =                                  // returns a handle to the bitmap
+                (HBITMAP)LoadImage(                     // load image function
+                    hInst,                              // the program that contains the resource
+                    MAKEINTRESOURCE(IDB_BITMAP1),       // match the id number with the rescource
+                    IMAGE_BITMAP,                       // type of resource
+                    0,                                  // x coordinate // usually 0 , 0 can
+                    0,                                  // y coordinate //    be offset
+                    NULL);                              // special load instuction
+
+            SelectObject(hmemdc, hBitmap1);             // points the memory do to the bitmap handle
+            GetObject(hBitmap1, sizeof(BITMAP), &bitmap); // copies resource into bitmap
+
+            // stretch background bitmap into window
+            StretchBlt(
+                hdc,                            // handle to the destination do
+                0,                              // x of the upper left corner of the destination
+                0,                              // y of the upper left corner of the destintaion
+                rClient.right,                  // width of the client rectangle
+                rClient.bottom,                 // heigth of the client rectangle
+                hmemdc,                         // handle to the memory do
+                0,                              // x of the upper left corner of the bitmap
+                0,                              // y of the upper left corner of the bitmap
+                bitmap.bmWidth,                 // width of the bitmap
+                bitmap.bmHeight,                // heigth of the bitmap
+                SRCCOPY);                       // perform a copy
+
+            // clean up
+            DeleteObject(hBitmap1);             // delete the handle to the first bitmap
+            DeleteDC(hmemdc);                   // delet the memory dc
+
             EndPaint(hWnd, &ps);
         }
         break;
@@ -205,35 +258,42 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             TEXT("STATIC"),
             TEXT("Input File Name"),
             WS_CHILD | WS_VISIBLE,
-            20, 30, 120, 20,
+            5, 10, 120, 20,
             hWnd, NULL, NULL, NULL);
 
         hWnd_txtData = CreateWindow(            // data txt file box
             TEXT("EDIT"),
             TEXT("file.txt"),
             WS_CHILD | WS_VISIBLE | WS_BORDER,
-            10, 50, 250, 30,
+            5, 35, 250, 30,
             hWnd, NULL, NULL, NULL);
 
         hWnd_btnSelectInput = CreateWindow(      // search for file to use as input  
             TEXT("BUTTON"),
             TEXT("Select File"),
             WS_CHILD | WS_VISIBLE | WS_BORDER | BS_DEFPUSHBUTTON,
-            50, 90, 100, 30,
+            150, 70, 100, 30,
+            hWnd, NULL, NULL, NULL);
+
+        hWnd_btnSelectOutput = CreateWindow(      // search for file to use as output  
+            TEXT("BUTTON"),
+            TEXT("Select File"),
+            WS_CHILD | WS_VISIBLE | WS_BORDER | BS_DEFPUSHBUTTON,
+            150, 145, 100, 30,
             hWnd, NULL, NULL, NULL);
 
         CreateWindow(                           // label for output file
             TEXT("STATIC"),
             TEXT("Output File Name"),
             WS_CHILD | WS_VISIBLE,
-            320, 30, 120, 20,
+            5, 85, 120, 20,
             hWnd, NULL, NULL, NULL);
 
         hWnd_txtOutput = CreateWindow(          // txt box for output file name
             TEXT("EDIT"),
             TEXT("Output.txt"),
             WS_CHILD | WS_VISIBLE | WS_BORDER,
-            310, 50, 250, 30,
+            5, 110, 250, 30,
             hWnd, NULL, NULL, NULL);
 
 
@@ -298,4 +358,36 @@ bool GetOpenFileName()
     }
     else
         return false;                                   // user cancelled selection
+}
+
+// use common save file dialog box to get output filespec
+bool GetSaveFileName()
+{
+    OPENFILENAME ofn;                                   // struct for GetOpenFileNameA()
+    char czFile[MAX_PATH];                              // local copy of input file name
+
+    // set up OPENFILENAME struct
+    ZeroMemory(&cOutputPath, sizeof(cOutputPath));      // empty (global) path variable
+    ZeroMemory(&ofn, sizeof(ofn));                      // empty struct
+    ofn.lStructSize = sizeof(ofn);                      // set size of struct
+    ofn.hwndOwner = NULL;                               // set owner window to null
+    ofn.lpstrFilter = LPWSTR("Any File\0*.*\0");        // set filename filter
+    ofn.lpstrFile = LPWSTR(cOutputPath);                // point to (global) path variable
+    ofn.nMaxFile = MAX_PATH;                            // set max size of path
+    ofn.lpstrFileTitle = LPWSTR(czFile);                // point to (local) filename
+    ofn.nMaxFileTitle = MAX_PATH;                       // set max size of filename
+    ofn.lpstrTitle = LPWSTR("Select an output File");   // set title text of dialog box
+    ofn.Flags = OFN_DONTADDTORECENT | OFN_OVERWRITEPROMPT; // set flags
+
+    if (GetSaveFileNameA(LPOPENFILENAMEA(&ofn))) // user selected an output file
+    {
+        // convert file name to TCHAR for future display
+        size_t pReturnValue;
+        mbstowcs_s(&pReturnValue, szOutFName, MAX_LOADSTRING, czFile, MAX_LOADSTRING);
+        // cOutputPath  cannot be converted to TCHAR because of \ in file path
+
+        return true;
+    }
+    else
+        return false;
 }

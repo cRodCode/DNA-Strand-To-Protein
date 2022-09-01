@@ -51,7 +51,13 @@
     <Image Include="small.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="picture_compress.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
     <Image Include="DNAStrandToProteinGUI.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="background.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

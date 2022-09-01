@@ -1,0 +1,11 @@
+﻿  DNAStrandToProteinGUI.cpp
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\DNAStrandToProteinGUI.cpp(155,65): warning C4302: 'type cast': truncation from 'HWND' to 'WORD'
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\DNAStrandToProteinGUI.cpp(166,64): warning C4302: 'type cast': truncation from 'HWND' to 'WORD'
+C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\DNAStrandToProteinGUI\DNAStrandToProteinGUI.cpp(178,59): warning C4302: 'type cast': truncation from 'HWND' to 'WORD'
+  Translate.cpp
+  Generating code
+  0 of 286 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  DNAStrandToProteinGUI.vcxproj -> C:\Users\Carlos\source\repos\DNAStrandToProteinGUI\x64\Release\DNAStrandToProteinGUI.exe
